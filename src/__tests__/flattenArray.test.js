@@ -2,6 +2,7 @@ import {
   flattenArrayRecursive,
   flattenArrayIterativeStack,
   flattenArrayIterativeQueue,
+  flattenArrayNative,
 } from '../flattenArray.js';
 
 describe('flattenArrayRecursive', () => {
@@ -33,6 +34,21 @@ describe('flattenArrayIterativeQueue', () => {
   test('should flatten a nested array with random truthy, falsy and Infinity values', () => {
     expect(
       flattenArrayIterativeQueue([
+        -1,
+        1,
+        null,
+        2,
+        [3, 4, [5, 6, [7, 8, 9]]],
+        [-Infinity, Infinity],
+      ])
+    ).toEqual([-1, 1, 2, 3, 4, 5, 6, 7, 8, 9, -Infinity, Infinity]);
+  });
+});
+
+describe('flattenArrayNative', () => {
+  test('should flatten a nested array with random truthy, falsy and Infinity values', () => {
+    expect(
+      flattenArrayNative([
         -1,
         1,
         null,
