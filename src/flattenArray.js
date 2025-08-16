@@ -53,3 +53,8 @@ export function flattenArrayIterativeQueue(arr) {
   }
   return result;
 }
+
+// ES2019+ only
+export function flattenArrayNative(arr) {
+  return arr.flat(Infinity).filter((elm) => elm !== null && elm !== undefined);
+}
