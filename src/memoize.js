@@ -1,6 +1,7 @@
 export function memoize(callback, resolver) {
   const cache = new Map();
-  const getKey = resolver ? resolver(...args) : JSON.stringify(args);
+  const getKey = (args) =>
+    resolver ? resolver(...args) : JSON.stringify(args);
 
   const memoized = function (...args) {
     const key = getKey(args); // generate a unique key for the current arguments
@@ -21,6 +22,10 @@ export function memoize(callback, resolver) {
   };
   memoized.clear = () => {
     cache.clear();
+  };
+  memoized.delete = function (...args) {
+    const key = getKey(args);
+    return cache.delete(key);
   };
   return memoized;
 }
